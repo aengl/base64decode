@@ -20,7 +20,7 @@
   <body>
     <pre><code id="content" class="language-sql"></code></pre>
     <script>
-      const query = new URLSearchParams(window.location.search).get("q");
+      const query = decodeURIComponent(window.location.search.split("=")[1]);
       document.getElementById("content").innerHTML = atob(query);
       hljs.highlightAll();
     </script>
