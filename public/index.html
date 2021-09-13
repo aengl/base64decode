@@ -20,11 +20,14 @@
   <body>
     <pre><code id="content" class="language-sql"></code></pre>
     <script>
-      const query = decodeURIComponent(window.location.search.split("=")[1]);
+      const query = atob(
+        decodeURIComponent(window.location.search.split("=")[1])
+      );
+      const content = document.getElementById("content");
+      content.innerHTML = query;
       import("https://cdn.skypack.dev/@sqltools/formatter").then(
         (formatter) => {
-          formatter.format(query);
-          document.getElementById("content").innerHTML = atob(query);
+          content.innerHTML = formatter.format(query);
           hljs.highlightAll();
         }
       );
